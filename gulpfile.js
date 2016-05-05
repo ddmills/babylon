@@ -43,6 +43,14 @@ gulp.task('vendor',  function() {
 });
 
 /*
+ * Copy resource files to the build directory
+ */
+gulp.task('resources',  function() {
+  return gulp.src('./resources/**/*')
+    .pipe(gulp.dest('./build/resources'));
+});
+
+/*
  * Copy HTML files over
  */
 gulp.task('html', function() {
@@ -75,7 +83,8 @@ gulp.task('watch', function() {
   gulp.watch('source/**/*.html', ['html']);
   gulp.watch('source/**/*.scss', ['sass']);
   gulp.watch('source/vendor/**/*', ['vendor']);
+  gulp.watch('resources/**/*', ['resources']);
 });
 
-gulp.task('build', ['transpile', 'sass', 'html', 'vendor']);
+gulp.task('build', ['transpile', 'sass', 'html', 'vendor', 'resources']);
 gulp.task('default', ['build']);
